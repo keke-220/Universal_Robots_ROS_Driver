@@ -24,4 +24,14 @@
   <arg name="headless_mode" default="false" doc="Automatically send URScript to robot to execute. On e-Series this does require the robot to be in 'remote-control' mode. With this, the URCap is not needed on the robot."/>
 
   <include file="$(find ur_robot_driver)/launch/ur_common.launch" pass_all_args="true" />
+
+  <include file="$(find segbot_bu_moveit_config)/launch/segbot_bu_moveit_planning_execution.launch"/>
+
+  <include file="$(find segbot_bu_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="rviz_config" value="$(find segbot_bu_moveit_config)/launch/moveit.rviz"/>
+  </include>
+
+  <node pkg="robotiq_2f_gripper_control" type="Robotiq2FGripperRtuNode.py" name="robotiq2FGripper" output="screen" args="/dev/ttyACM0">
+  </node>
+
 </launch>
